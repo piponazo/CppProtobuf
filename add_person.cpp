@@ -1,8 +1,9 @@
 // See README.txt for information and build instructions.
 
+#include <google/protobuf/util/time_util.h>
+
 #include <ctime>
 #include <fstream>
-#include <google/protobuf/util/time_util.h>
 #include <iostream>
 #include <string>
 
@@ -67,7 +68,7 @@ int main(int argc, char* argv[]) {
 
   if (argc != 2) {
     cerr << "Usage:  " << argv[0] << " ADDRESS_BOOK_FILE" << endl;
-    return -1;
+    return EXIT_FAILURE;
   }
 
   tutorial::AddressBook address_book;
@@ -79,7 +80,7 @@ int main(int argc, char* argv[]) {
       cout << argv[1] << ": File not found.  Creating a new file." << endl;
     } else if (!address_book.ParseFromIstream(&input)) {
       cerr << "Failed to parse address book." << endl;
-      return -1;
+      return EXIT_FAILURE;
     }
   }
 
@@ -91,13 +92,12 @@ int main(int argc, char* argv[]) {
     fstream output(argv[1], ios::out | ios::trunc | ios::binary);
     if (!address_book.SerializeToOstream(&output)) {
       cerr << "Failed to write address book." << endl;
-      return -1;
+      return EXIT_FAILURE;
     }
   }
 
   // Optional:  Delete all global objects allocated by libprotobuf.
   google::protobuf::ShutdownProtobufLibrary();
 
-  return 0;
+  return EXIT_SUCCESS;
 }
-

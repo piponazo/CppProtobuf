@@ -34,5 +34,6 @@
 # Common build directories
 build*
 
-# Temporary vim files
+# Temporary vim & QtCreator files
 *.swp
+CMakeLists.txt.user

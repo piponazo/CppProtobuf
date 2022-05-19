@@ -1,7 +1,8 @@
 // See README.txt for information and build instructions.
 
-#include <fstream>
 #include <google/protobuf/util/time_util.h>
+
+#include <fstream>
 #include <iostream>
 #include <string>
 
@@ -56,7 +57,7 @@ int main(int argc, char* argv[]) {
 
   if (argc != 2) {
     cerr << "Usage:  " << argv[0] << " ADDRESS_BOOK_FILE" << endl;
-    return -1;
+    return EXIT_FAILURE;
   }
 
   tutorial::AddressBook address_book;
@@ -75,6 +76,5 @@ int main(int argc, char* argv[]) {
   // Optional:  Delete all global objects allocated by libprotobuf.
   google::protobuf::ShutdownProtobufLibrary();
 
-  return 0;
+  return EXIT_SUCCESS;
 }
-
